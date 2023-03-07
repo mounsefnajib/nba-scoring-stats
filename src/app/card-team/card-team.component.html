@@ -1,0 +1,54 @@
+
+    
+        <div *ngIf="teamStat" class="card mb-4 rounded-3 shadow-sm" id="teamcard">
+            
+          <div class="card-header py-3">
+            <button 
+                id="remove{{teamStat.team.abbreviation}}" 
+                type="button" class="btn-close close" 
+                aria-label="Close"  
+                (click)="deleteTeam(teamStat.team.id)">
+            </button>
+            <h4 class="my-0 fw-normal">{{teamStat.team.full_name }} [{{teamStat.team.abbreviation}}]</h4>
+            <span>{{teamStat.team.conference}} conference</span>
+            
+          </div>
+          <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <ul class="list-unstyled  ">
+                        <li class="text-small">Results of past 12 days :</li>
+                        <li> 
+                            <span 
+                            *ngFor="let teamScoring of teamStat.stats" 
+                            [ngClass]="teamScoring.winLose === 'W' ? 'text-bg-success' : 'text-bg-danger'" 
+                            class="badge ml-3"
+                            >{{teamScoring.winLose}}
+                            </span>
+                        </li>
+                        <li>Avg pts scored: {{teamStat.averages?.avgScored}}</li>
+                        <li>Avg pts conceded: {{teamStat.averages?.avgConceded}}</li>
+                    </ul>
+                </div>
+                <div class="col-6">
+                    <img src="https://interstate21.com/nba-logos/{{teamStat.team.abbreviation}}.png"
+                    [style.width.px]='200'
+                   >
+                   
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <button 
+                    id="results{{teamStat.team.abbreviation}}" 
+                    type="button" 
+                    class="w-100 btn btn-lg btn-success"
+                    routerLink="/results/{{teamStat.team.abbreviation}}">See game results >></button>
+                </div>
+            </div>
+
+            
+          </div>
+        </div>
+  
+

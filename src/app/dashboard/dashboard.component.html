@@ -1,0 +1,17 @@
+<div class="row mb-3">
+    
+    <div class="col-6" *ngIf="teams$ | async as teams">
+        <select class="form-select" aria-label="Default select example" [(ngModel)] = "selectedTeamId" id="teamSelect">
+            <option *ngFor="let team of teams" value="{{team.id}}">{{team.full_name}}</option>
+        </select>
+    </div>
+    <div class="col-2">
+        <button type="button" class="btn btn-success" (click)="addTeamToTrack()" id="trackBtn">Track team</button>
+    </div>
+</div>
+
+<div *ngIf="teamsStats$ | async as teamsStats" class="row">
+    <div  *ngFor="let teamStat of teamsStats" class="col-6">
+        <app-card-team  [teamStat]="teamStat"></app-card-team>
+    </div>
+</div>
